@@ -7,8 +7,11 @@ const router = express.Router()
 router.get('/', async (req,res) => {
     console.log('get started', req.params)
     try{
+        console.log('hit')
         const smarterObjects = await SmarterObject.find()
-        res.json(smarterObjects)
+        res.json(smarterObjects.slice(-1)[0] )
+
+
     }catch{
         err => res.json({message: err})
     }
@@ -19,6 +22,7 @@ router.post('/', async (req, res) => {
     console.log(req.body)
     const smarterObject = new SmarterObject({
         name: req.body.name,
+        date: req.body.date,
         sO_reportsInfo: req.body.sO_reportsInfo,
         keyDriverObjs: req.body.keyDriverObjs,
         locationObjs: req.body.locationObjs
@@ -35,4 +39,4 @@ router.post('/', async (req, res) => {
 router.get('/:postId')
 
 
-export { router as postsRoute }
+export { router as smarterObjectsRoute }

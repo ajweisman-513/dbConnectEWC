@@ -14,10 +14,10 @@ const mongoDb = process.env.DB_CONNECTION
 app.use(bodyParser.json())
 
 
-import { postsRoute } from './routes/posts.js'
+import { smarterObjectsRoute } from './routes/smarterObjects.js'
 
 //MIDDLEWARE
-app.use('/posts', postsRoute)
+app.use('/smarterObjects', smarterObjectsRoute)
 
  
 
@@ -33,4 +33,4 @@ mongoose.connect(
     () => console.log("connected to db!") 
 )
 
-app.listen(5001)
+app.listen(5003)

@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 
 const SmarterObjectSchema = mongoose.Schema({
     name: String,
+    date: Number,
     sO_reportsInfo: Object,
     keyDriverObjs: Array,
     locationObjs: Array
