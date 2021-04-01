@@ -29,7 +29,7 @@ app.get('/', (req,res) => {
 // Connect to DB
 mongoose.connect(
     mongoDb, 
-    { useNewUrlParser: true },
+    { useNewUrlParser: true, useUnifiedTopology: true },
     () => console.log("connected to db!") 
 )
 
