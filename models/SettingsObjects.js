@@ -9,4 +9,4 @@ const SettingsObjectSchema = mongoose.Schema({
 })
 
 
-export default mongoose.model('settingsObject', SettingsObjectSchema)
+export default mongoose.model('settingsObject', SettingsObjectSchema, collectionName)
