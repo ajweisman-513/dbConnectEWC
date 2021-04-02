@@ -8,4 +8,4 @@ const SmarterObjectSchema = mongoose.Schema({
     locationObjs: Array
 })
 
-export default mongoose.model('smarterObstinants', SmarterObjectSchema)
+export default mongoose.model('smarterObject', SmarterObjectSchema)

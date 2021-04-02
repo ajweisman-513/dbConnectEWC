@@ -3,15 +3,12 @@ import SmarterObject from '../models/SmarterObjects.js'
 
 const router = express.Router()
 
-// GET ALL SMARTEROBJECTS
+// GET LATEST SMARTEROBJECT
 router.get('/', async (req,res) => {
-    console.log('get started', req.params)
+    console.log('get sO', req.params)
     try{
-        console.log('hit')
         const smarterObjects = await SmarterObject.find()
         res.json(smarterObjects.slice(-1)[0] )
-
-
     }catch{
         err => res.json({message: err})
     }

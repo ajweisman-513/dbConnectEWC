@@ -2,10 +2,10 @@ import mongoose from "mongoose"
 
 const SettingsObjectSchema = mongoose.Schema({
     acctName: String,
-    uploadDate: Number,
-    sO_reportsInfo: Object,
-    keyDriverObjs: Array,
-    locationObjs: Array
+    settingsDate: Number,
+    keyDriverSettings: Array,
+    kpiSettings: Array
 })
 
-export default mongoose.model('smarterObject', SettingsObjectSchema)
+
+export default mongoose.model('settingsObject', SettingsObjectSchema)

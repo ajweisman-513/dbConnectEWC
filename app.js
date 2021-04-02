@@ -17,9 +17,11 @@ app.use(bodyParser.json())
 
 
 import { smarterObjectsRoute } from './routes/smarterObjects.js'
+import { settingsObjectsRoute } from './routes/settingsObjects.js';
 
 //MIDDLEWARE
 app.use('/smarterObjects', smarterObjectsRoute)
+app.use('/settingsObjects', settingsObjectsRoute)
 
  
 
