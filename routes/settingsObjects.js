@@ -18,10 +18,10 @@ router.get('/', async (req,res) => {
 router.post('/', async (req, res) => {
     console.log(req.body)
     const settingsObject = new SettingsObject({
-        acctName: req.body.name,
-        settingsDate: req.body.date,
-        keyDriverSettings: req.body.sO_reportsInfo,
-        kpiSettings: req.body.keyDriverObjs
+        acctName: req.body._acctName,
+        settingsDate: req.body._settingsDate,
+        keyDriverSettings: req.body._keyDriverSettings,
+        kpiSettings: req.body._kpiSettings
     })
     try{
     const savedSettingsObject = await settingsObject.save()
