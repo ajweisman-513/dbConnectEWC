@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
         settingsDateReadable: req.body._settingsDateReadable,
         keyDriverSettings: req.body._keyDriverSettings,
         kpiSettings: req.body._kpiSettings
-    }, {collection: 'alex'})
+    })
     try{
     const savedSettingsObject = await settingsObject.save()
     res.json(savedSettingsObject)
