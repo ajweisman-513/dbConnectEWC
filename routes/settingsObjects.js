@@ -9,7 +9,7 @@ router.get('/', async (req,res) => {
     try{
         const settingsObjects = await SettingsObject.find(acctName)
         console.log("the returning object", settingsObjects)
-        res.json(settingsObjects) //.slice(-1)[0] )
+        res.json(settingsObjects)
     }catch{
         err => res.json({message: err})
     }
