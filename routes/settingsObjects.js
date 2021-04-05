@@ -5,10 +5,11 @@ const router = express.Router()
 
 // GET LATEST SETTINGS OBJECT
 router.get('/', async (req,res) => {
-    console.log('get settings', req.params)
+    let acctName = req.body
     try{
-        const settingsObjects = await SettingsObject.find()
-        res.json(settingsObjects.slice(-1)[0] )
+        const settingsObjects = await SettingsObject.find(acctName)
+        console.log("the returning object", settingsObjects)
+        res.json(settingsObjects) //.slice(-1)[0] )
     }catch{
         err => res.json({message: err})
     }
