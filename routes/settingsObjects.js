@@ -16,7 +16,7 @@ const SettingsObjectSchema = mongoose.Schema({
 router.get('/', async (req,res) => {
     console.log(req.body)
     let acctName = req.body
-    let collection = acctName + "-" + SettingsObject
+    let collection = acctName + "-SettingsObject"
     try{
         const settingsObjects = await collection.find()
         console.log("the returning object", settingsObjects)
