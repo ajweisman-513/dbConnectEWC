@@ -14,6 +14,7 @@ const SettingsObjectSchema = mongoose.Schema({
 
 // GET LATEST SETTINGS OBJECT
 router.get('/', async (req,res) => {
+    console.log(req.body)
     let acctName = req.body
     let collection = acctName + "-" + SettingsObject
     try{
