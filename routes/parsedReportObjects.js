@@ -40,8 +40,8 @@ router.post('/', async (req, res) => {
         reportData: req.body._reportData
     })
     try{
-    const savedSettingsObject = await settingsObject.save()
-    res.json(savedSettingsObject)
+    const savedparsedReportObject = await parsedReportObject.save()
+    res.json(savedparsedReportObject)
     }catch{
         err => res.json({message: err})
     }
