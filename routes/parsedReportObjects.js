@@ -33,11 +33,11 @@ router.post('/', async (req, res) => {
 
     const parsedReportObject = new dynamicParsedReportObjectSchema({
         acctName: req.body._acctName,
-        reportType = req.body._reportType,
-        runDate = req.body._runDate,
+        reportType: req.body._reportType,
+        runDate: req.body._runDate,
         runDateReadable: req.body._runDateReadable,
-        runPeriod = req.body._runPeriod,
-        reportData = req.body._reportData
+        runPeriod: req.body._runPeriod,
+        reportData: req.body._reportData
     })
     try{
     const savedSettingsObject = await settingsObject.save()
