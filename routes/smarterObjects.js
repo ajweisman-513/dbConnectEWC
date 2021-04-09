@@ -28,7 +28,7 @@ router.post('/', async (req, res) => {
     console.log(req.body)
     const collectionName = req.body._acctName
     const dynamicSmarterObjectSchema = mongoose.model(
-        'smarterObject',
+        'SmarterObject',
         SmarterObjectSchema,
         collectionName + '-SmarterObject'
     )
