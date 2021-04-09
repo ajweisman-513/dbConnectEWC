@@ -15,15 +15,15 @@ app.use(cors())
 //body-parser will parse incoming to json for DB post
 app.use(bodyParser.json())
 
-
-import { smarterObjectsRoute } from './routes/smarterObjects.js'
 import { settingsObjectsRoute } from './routes/settingsObjects.js';
+import { parsedReportsObjectsRoute } from './routes/parsedReportObjects.js';
+import { smarterObjectsRoute } from './routes/smarterObjects.js'
+
 
 //MIDDLEWARE
-app.use('/smarterObjects', smarterObjectsRoute)
 app.use('/settingsObjects', settingsObjectsRoute)
-
- 
+app.use('/parsedReportsObjectsRoute', parsedReportsObjectsRoute)
+app.use('/smarterObjects', smarterObjectsRoute)
 
 //ROUTES
 app.get('/', (req,res) => {
