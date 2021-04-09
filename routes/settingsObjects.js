@@ -1,7 +1,16 @@
 import express from 'express'
-import SettingsObject from '../models/SettingsObjects.js'
+import mongoose from "mongoose"
 
 const router = express.Router()
+
+const SettingsObjectSchema = mongoose.Schema({
+    acctName: String,
+    settingsDate: Number,
+    settingsDateReadable: String,
+    keyDriverSettings: Array,
+    kpiSettings: Array
+})
+
 
 // GET LATEST SETTINGS OBJECT
 router.get('/', async (req,res) => {
@@ -18,7 +27,13 @@ router.get('/', async (req,res) => {
 // POST NEW SETTINGSOBJECT
 router.post('/', async (req, res) => {
     console.log(req.body)
-    const settingsObject = new SettingsObject({
+    const collectionName = req.body._acctName
+    const dynamicSettingsObjectSchema = mongoose.model(
+        'SettingsObject',
+        SettingsObjectSchema,
+        collectionName + '-SettingsObject'
+    )
+    const settingsObject = new dynamicSettingsObjectSchema({
         acctName: req.body._acctName,
         settingsDate: req.body._settingsDate,
         settingsDateReadable: req.body._settingsDateReadable,

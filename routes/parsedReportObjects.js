@@ -26,11 +26,13 @@ router.get('/', async (req,res) => {
 
 // POST NEW PARSED REPORT OBJECT
 router.post('/', async (req, res) => {
-    console.log(req.body)
-    
+    console.log(req.body)    
     const collectionName = req.body._acctName
-    const dynamicParsedReportObjectSchema = mongoose.model('ParsedReportObject', ParsedReportObjectSchema, 'ParsedReportObject' + collectionName) 
-
+    const dynamicParsedReportObjectSchema = mongoose.model(
+        'ParsedReportObject', 
+        ParsedReportObjectSchema, 
+        collectionName + '-ParsedReportObject'
+    ) 
     const parsedReportObject = new dynamicParsedReportObjectSchema({
         acctName: req.body._acctName,
         reportType: req.body._reportType,

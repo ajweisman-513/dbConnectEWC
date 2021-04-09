@@ -1,7 +1,16 @@
 import express from 'express'
-import SmarterObject from '../models/SmarterObjects.js'
+import mongoose from "mongoose"
 
 const router = express.Router()
+
+const SmarterObjectSchema = mongoose.Schema({
+    name: String,
+    uploadDate: Number,
+    sO_reportsInfo: Object,
+    keyDriverObjs: Array,
+    locationObjs: Array
+})
+
 
 // GET LATEST SMARTEROBJECT
 router.get('/', async (req,res) => {
@@ -17,8 +26,14 @@ router.get('/', async (req,res) => {
 // POST NEW SMARTEROBJECT
 router.post('/', async (req, res) => {
     console.log(req.body)
-    const smarterObject = new SmarterObject({
-        name: req.body.name,
+    const collectionName = req.body._acctName
+    const dynamicSmarterObjectSchema = mongoose.model(
+        'smarterObject',
+        SmarterObjectSchema,
+        collectionName + '-SmarterObject'
+    )
+    const smarterObject = new dynamicSmarterObjectSchema({
+        acctName: req.body._acctName,
         date: req.body.date,
         sO_reportsInfo: req.body.sO_reportsInfo,
         keyDriverObjs: req.body.keyDriverObjs,

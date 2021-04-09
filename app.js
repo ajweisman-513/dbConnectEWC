@@ -22,7 +22,7 @@ import { smarterObjectsRoute } from './routes/smarterObjects.js'
 
 //MIDDLEWARE
 app.use('/settingsObjects', settingsObjectsRoute)
-app.use('/parsedReportsObjectsRoute', parsedReportsObjectsRoute)
+app.use('/parsedReportsObjects', parsedReportsObjectsRoute)
 app.use('/smarterObjects', smarterObjectsRoute)
 
 //ROUTES
