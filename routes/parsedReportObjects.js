@@ -14,10 +14,17 @@ const ParsedReportObjectSchema = mongoose.Schema({
 
 // GET LATEST Report OBJECT
 router.get('/', async (req,res) => {
-    let acctName = req.body
+    console.log(req.body)
+    let acctName = req.body.data.acctName
+    const collectionName = acctName + '-ParsedReportObject'
+    const dynamicParsedReportObjCollectionName = mongoose.model(
+        'SettingsObject',
+        ParsedReportObjectSchema,
+        collectionName
+    )
     try{
-        const parsedReportObjects = await ParsedReportObject.find(acctName)
-        console.log("the returning object", settingsObjects)
+        const parsedReportObjects = await dynamicParsedReportObjCollectionName.find()
+        console.log("the returning parsedReportObjects", parsedReportObjects)
         res.json(settingsObjects)
     }catch{
         err => res.json({message: err})
@@ -27,13 +34,14 @@ router.get('/', async (req,res) => {
 // POST NEW PARSED REPORT OBJECT
 router.post('/', async (req, res) => {
     console.log(req.body)    
-    const collectionName = req.body._acctName
-    const dynamicParsedReportObjectSchema = mongoose.model(
+    const acctName = req.body._acctName
+    const collectionName = acctName + '-ParsedReportObject'
+    const dynamicParsedReportObjCollectionName = mongoose.model(
         'ParsedReportObject', 
         ParsedReportObjectSchema, 
-        collectionName + '-ParsedReportObject'
+        collectionName
     ) 
-    const parsedReportObject = new dynamicParsedReportObjectSchema({
+    const parsedReportObject = new dynamicParsedReportObjCollectionName({
         acctName: req.body._acctName,
         reportType: req.body._reportType,
         runDate: req.body._runDate,

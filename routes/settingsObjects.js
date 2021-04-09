@@ -15,11 +15,16 @@ const SettingsObjectSchema = mongoose.Schema({
 // GET LATEST SETTINGS OBJECT
 router.get('/', async (req,res) => {
     console.log(req.body)
-    let acctName = req.body
-    let collection = acctName + "-SettingsObject"
-    try{
-        const settingsObjects = await collection.find()
-        console.log("the returning object", settingsObjects)
+    let acctName = req.body.data.acctName
+    const collectionName = acctName + '-SettingsObject'
+    const dynamicSetObjCollectionName = mongoose.model(
+        'SettingsObject',
+        SettingsObjectSchema,
+        collectionName
+    )
+    try{        
+        const settingsObjects = await dynamicSetObjCollectionName.find()
+        console.log("the returning settingsObjects", settingsObjects)
         res.json(settingsObjects)
     }catch{
         err => res.json({message: err})
@@ -29,13 +34,14 @@ router.get('/', async (req,res) => {
 // POST NEW SETTINGSOBJECT
 router.post('/', async (req, res) => {
     console.log(req.body)
-    const collectionName = req.body._acctName
-    const dynamicSettingsObjectSchema = mongoose.model(
+    const acctName = req.body._acctName
+    const collectionName = acctName + '-SettingsObject'
+    const dynamicSetObjCollectionName = mongoose.model(
         'SettingsObject',
         SettingsObjectSchema,
-        collectionName + '-SettingsObject'
+        collectionName
     )
-    const settingsObject = new dynamicSettingsObjectSchema({
+    const settingsObject = new dynamicSetObjCollectionName({
         acctName: req.body._acctName,
         settingsDate: req.body._settingsDate,
         settingsDateReadable: req.body._settingsDateReadable,
