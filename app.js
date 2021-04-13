@@ -16,13 +16,15 @@ app.use(cors())
 app.use(bodyParser.json())
 
 import { settingsObjectsRoute } from './routes/settingsObjects.js';
-import { parsedReportsObjectsRoute } from './routes/parsedReportObjects.js';
+import { microBundlesRoute } from './routes/microBundles.js';
+//import { parsedReportsObjectsRoute } from './routes/parsedReportObjects.js';
 import { smarterObjectsRoute } from './routes/smarterObjects.js'
 
 
 //MIDDLEWARE
 app.use('/settingsObjects', settingsObjectsRoute)
-app.use('/parsedReportsObjects', parsedReportsObjectsRoute)
+app.use('/microBundles', microBundlesRoute)
+//app.use('/parsedReportsObjects', parsedReportsObjectsRoute)
 app.use('/smarterObjects', smarterObjectsRoute)
 
 //ROUTES
