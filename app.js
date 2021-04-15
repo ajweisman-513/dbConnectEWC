@@ -13,7 +13,10 @@ const mongoDb = process.env.DB_CONNECTION
 
 app.use(cors())
 //body-parser will parse incoming to json for DB post
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}))
+app.use(bodyParser.urlencoded({limit: '50mb'}))
+app.use(express.json({limit: '50mb'}));
+app.use(express.urlencoded({limit: '50mb'}));
 
 import { settingsObjectsRoute } from './routes/settingsObjects.js';
 import { microBundlesRoute } from './routes/microBundles.js';
