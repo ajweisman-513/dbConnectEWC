@@ -14,9 +14,10 @@ const SettingsObjectSchema = mongoose.Schema({
 
 // GET LATEST SETTINGS OBJECT
 router.get('/', async (req,res) => {
-    console.log(req.body)
-    let acctName = req.body.acctName
+    console.log(req.body.data.acctName)
+    let acctName = req.body.data.acctName
     const collectionName = acctName + '-SettingsObject'
+    console.log(collectionName)
     const dynamicSetObjCollectionName = mongoose.model(
         'SettingsObject',
         SettingsObjectSchema,
