@@ -13,7 +13,7 @@ const MicroBundleSchema = mongoose.Schema({
 
 // GET LATEST Report OBJECT
 router.get('/', async (req,res) => {
-    console.log(req.body)
+    console.log("req.body", req.body)
     let acctName = req.body.data.acctName
     const collectionName = acctName + '-MicroBundle'
     const dynamicMicroBundleCollectionName = mongoose.model(

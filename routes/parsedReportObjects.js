@@ -14,7 +14,7 @@ const ParsedReportObjectSchema = mongoose.Schema({
 
 // GET LATEST Report OBJECT
 router.get('/', async (req,res) => {
-    console.log(req.body)
+    console.log("req.body", req.body)
     let acctName = req.body.data.acctName
     const collectionName = acctName + '-ParsedReportObject'
     const dynamicParsedReportObjCollectionName = mongoose.model(
