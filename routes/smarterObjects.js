@@ -43,8 +43,9 @@ router.post('/', async (req, res) => {
     )
     const smarterObject = new dynamicSmarterObjCollectionName({
         acctName: req.body._acctName,
-        date: req.body.date,
+        dbPushDate: req.body._dbPushDate,
         sO_reportsInfo: req.body.sO_reportsInfo,
+        kpiSettings: req.body.kpiSettings,
         keyDriverObjs: req.body.keyDriverObjs,
         locationObjs: req.body.locationObjs
     })
