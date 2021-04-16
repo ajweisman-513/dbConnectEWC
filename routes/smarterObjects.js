@@ -4,9 +4,10 @@ import mongoose from "mongoose"
 const router = express.Router()
 
 const SmarterObjectSchema = mongoose.Schema({
-    name: String,
-    uploadDate: Number,
+    _acctName: String,
+    _dbPushDate: String,
     sO_reportsInfo: Object,
+    kpiSettings: Array,
     keyDriverObjs: Array,
     locationObjs: Array
 })
