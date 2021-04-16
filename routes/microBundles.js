@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
         settingsInformation: req.body._settingsInformation,
         keyDrvSettingsArray: req.body._keyDrvSettingsArray,
         kpiSettingsArray: req.body._kpiSettingsArray,
-        microObjectsArray: req.body_microObjectsArray
+        microObjectsArray: req.body._microObjectsArray
     })
     try{
     const savedmicroBundleObject = await microBundleObject.save()
