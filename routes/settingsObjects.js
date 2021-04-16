@@ -26,7 +26,7 @@ router.get('/', async (req,res) => {
     try{        
         const settingsObjects = await dynamicSetObjCollectionName.find()
         console.log("the returning settingsObjects", settingsObjects)
-        res.json(settingsObjects)
+        res.json(settingsObjects.slice(-1)[0] )
     }catch{
         err => res.json({message: err})
     }

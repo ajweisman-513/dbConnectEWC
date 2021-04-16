@@ -24,7 +24,7 @@ router.get('/', async (req,res) => {
     try{
         const microBundleObjects = await dynamicMicroBundleCollectionName.find()
         console.log("the returning microBundle", microBundleObjects)
-        res.json(microBundleObjects)
+        res.json(microBundleObjects.slice(-1)[0] )
     }catch{
         err => res.json({message: err})
     }

@@ -25,7 +25,7 @@ router.get('/', async (req,res) => {
     try{
         const parsedReportObjects = await dynamicParsedReportObjCollectionName.find()
         console.log("the returning parsedReportObjects", parsedReportObjects)
-        res.json(settingsObjects)
+        res.json(parsedReportObjects.slice(-1)[0] )
     }catch{
         err => res.json({message: err})
     }
