@@ -16,7 +16,7 @@ const SmarterObjectSchema = mongoose.Schema({
 // GET LATEST SMARTEROBJECT
 router.get('/', async (req,res) => {
     console.log("req.body", req.body)
-    const acctName = req.body._acctName
+    const acctName = req.body.acctName
     const collectionName = acctName + '-SmarterObject'
     const dynamicSmarterObjCollectionName = mongoose.model(
         'SmarterObject',
