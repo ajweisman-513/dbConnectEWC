@@ -51,39 +51,32 @@ router.post('/', async (req, res) => {
 })
 
 // UPDATE TO SMARTEROBJECT
-router.patch('/:id', async (req, res, next) => {
+router.patch('/:id', async (req, res) => {
+    console.log("id for this is", req.params)
     console.log("req.body", req.body)
     const id = req.params.id
-    console.log("id for this is", req.params)
+    const macroArray = req.body.type
     const acctName = req.body.acctName
     const collectionName = acctName + '-SmarterObject'
     const DynamicSmarterObjCollectionName = mongoose.model(
         'SmarterObject',
         SmarterObjectSchema,
         collectionName
-    )
-    const locationObj = req.body.locationObj
-    const macroArray = req.body.type
-    const tom = function macroType() {
-        if(req.body.type === 'neg') return "_keyDrvMacrosVarNegative"
-        if(req.body.type === 'pos') return "_keyDrvMacrosVarPositive" 
-
-    }
-    console.log(tom())
+    )    
     await DynamicSmarterObjCollectionName
         .findById(id, function (err, foundObject) {
             if (err) return res.status(500).send(err)
             if (!foundObject) res.status(404).send("Not Found")
             if (foundObject) {
-
-                let location = foundObject.locationObjs.id(locationObj)["_keyDrvMacrosVarNegative"][9]
-                //let macroObj = location.macroType().id()
-                //foundObject.acctName2 = req.body.acctName2
-                //foundObject.save()
-                res.status(200).send(location)
+                let location = foundObject.locationObjs.id(req.body.locationObj)
+                let macroObjToUpdate = location[macroArray][0]
+                macroObjToUpdate._isComplete = req.body.newStatus
+                foundObject.acctName2 = req.body.acctName2
+                foundObject.markModified('locationObjs')
+                foundObject.save()
+                res.status(200).send(foundObject)
             }
-        })
-
+        })  
 })
 
 export { router as smarterObjectsRoute }
