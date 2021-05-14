@@ -55,8 +55,4 @@ router.post('/', async (req, res) => {
     }
 })
 
-// SPECIFIC BUNDLE
-router.get('/:postId')
-
-
 export { router as microBundlesRoute }

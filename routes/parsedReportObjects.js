@@ -57,8 +57,4 @@ router.post('/', async (req, res) => {
     }
 })
 
-// SPECIFIC SETTINGSOBJECT
-router.get('/:postId')
-
-
 export { router as parsedReportsObjectsRoute }
