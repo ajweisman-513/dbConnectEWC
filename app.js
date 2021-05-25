@@ -9,7 +9,13 @@ dotenv.config()
 // start express
 const app = express()
 const port = process.env.PORT
-const mongoDb = process.env.DB_CONNECTION_DEV
+let mongoDb = null
+//MongoDb Connection
+if (process.env.NODE_ENV === "production") {
+    mongoDb = process.env.DB_CONNECTION;
+} else {
+    mongoDb = process.env.DB_CONNECTION_DEV;
+}
 
 app.use(cors())
 //body-parser will parse incoming to json for DB post
@@ -35,11 +41,12 @@ app.get('/', (req,res) => {
     res.send('ET fone home')
 }) 
 
+
 // Connect to DB
 mongoose.connect(
     mongoDb, 
     { useNewUrlParser: true, useUnifiedTopology: true },
-    () => console.log("connected to db!") 
+    () => console.log("connected to db at...", mongoDb) 
 )
 
 app.listen(port, () => console.log(`Server running on ${port}`))

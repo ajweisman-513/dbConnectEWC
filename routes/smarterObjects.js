@@ -51,11 +51,11 @@ router.post('/', async (req, res) => {
 })
 
 // UPDATE TO SMARTEROBJECT
-router.patch('/:id', async (req, res) => {
+router.patch('/update/:id', async (req, res) => {
     console.log("id for this is", req.params)
     console.log("req.body", req.body)
     const id = req.params.id
-    const macroArray = req.body.type
+    const macroArray = req.body.macroObjectType
     const acctName = req.body.acctName
     const collectionName = acctName + '-SmarterObject'
     const DynamicSmarterObjCollectionName = mongoose.model(
@@ -69,12 +69,21 @@ router.patch('/:id', async (req, res) => {
             if (!foundObject) res.status(404).send("Not Found")
             if (foundObject) {
                 let location = foundObject.locationObjs.id(req.body.locationObj)
-                let macroObjToUpdate = location[macroArray][0]
-                macroObjToUpdate._isComplete = req.body.newStatus
-                foundObject.acctName2 = req.body.acctName2
+                let macroObjToUpdate = location[macroArray].id(req.body.macroObject_Id)
+                if (req.body.newIsCompleteStatus === false) {
+                    macroObjToUpdate._isComplete = false
+                    macroObjToUpdate._isCompletedAs = ''
+                    return res.status(200).send(
+                        {
+                            status: "item reset to default status",
+                            macroObjToUpdate
+                        })
+                }
+                macroObjToUpdate._isComplete = req.body.newIsCompleteStatus
+                macroObjToUpdate._isCompletedAs = req.body.newIsCompletedAs
                 foundObject.markModified('locationObjs')
                 foundObject.save()
-                res.status(200).send(foundObject)
+                res.status(200).send(macroObjToUpdate)
             }
         })  
 })

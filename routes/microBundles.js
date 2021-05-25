@@ -24,7 +24,8 @@ router.get('/', async (req,res) => {
     try{
         const microBundleObjects = await dynamicMicroBundleCollectionName.find()
         console.log("the returning microBundle", microBundleObjects)
-        res.json(microBundleObjects.slice(-1)[0] )
+        res.json(microBundleObjects.slice(-1)[0])
+        res.send("Bundles of Joy")
     }catch{
         err => res.json({message: err})
     }
@@ -32,6 +33,7 @@ router.get('/', async (req,res) => {
 
 // POST NEW MICRO BUNDLE OBJECT
 router.post('/', async (req, res) => {
+    console.log('the NUMBER of submit is', 1)
     console.log(req.body)    
     const acctName = req.body._acctName
     const collectionName = acctName + '-MicroBundle'

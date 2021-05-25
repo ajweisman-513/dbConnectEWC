@@ -1,29 +1,34 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
+const Mixed = Schema.Types.Mixed;
+
+const reqString = { type: String, required: true }
 
 const MacroObjectSchema = new Schema({
-	_kpi: { type: String, required: true },
-	_eeCode: { type: String, required: true },
-	_eeName: { type: String, required: true },
-	_position: { type: String, required: true },
-	_uuid: { type: Number, required: true },
-	_isComplete: { type: Boolean, required: false },
-	_isPresent: { type: Boolean, required: false },
-	_isPromptAs: { type: String, required: false },
-	_isCompletedAs: { type: String, required: false },
-	_keyDriver: { type: String, required: true },
-	_target: { type: Number, required: true },
-	_l1_now: { type: Number, required: true },
-	_locationTotalTickets: { type: Number, required: true },
-	_p1_now: { type: Number, required: true },
-	_p2_prev: { type: Number, required: true },
-	_employeeTotalTickets: { type: Number, required: true },
-	_swayFactor: { type: Number, required: true },
-	_locVarianceRaw: { type: Number, required: true },
-	_eeVarianceRaw: { type: Number, required: true },
-	_eeVarianceCalibrated: { type: Number, required: true },
-	_eeTrajectoryPercent: { type: Number, required: true },
-	_eeTrajectoryStated: { type: String, required: true }
+	_kpi: String,
+	_eeCode: String,
+	_eeName: String,
+	_position: String,
+	_uuid: Number,
+	_isComplete: Boolean,
+	_isPresent: Boolean,
+	_isPromptAs: String,
+	_isCompletedAs: String,
+	_keyDriver: String,
+	_target: Number,
+	_l1_now: Number,
+	_locationTotalTickets: Number,
+	_p1_now: Number,
+	_p2_prev: Number,
+	_employeeTotalTickets: Number,
+	_swayFactor: Number,
+	_locVarianceRaw: Number,
+	_eeVarianceRaw: Number,
+	_eeVarianceCalibrated: Number,
+	_eeTrajectoryPercent: Mixed,
+	_eeTrajectoryStated: String
+}, {
+    timestamps: true
 })
 
 export default MacroObjectSchema

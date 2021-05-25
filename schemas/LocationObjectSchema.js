@@ -8,8 +8,10 @@ const LocationObjectSchema = new Schema({
     _locPerfStats: { type: Object, required: true },
     _locKdStatCards:{ type: Array, required: true },
     _eeObjs: { type: Array, required: true },
-    _keyDrvMacrosVarPositive: { type: Array, required: true },
-    _keyDrvMacrosVarNegative: { type: Array, required: true }
+    _keyDrvMacrosVarPositive: [MacroObjectSchema],
+    _keyDrvMacrosVarNegative: [MacroObjectSchema]
+}, {
+    timestamps: true
 })
 
 export default LocationObjectSchema
