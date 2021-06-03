@@ -52,16 +52,16 @@ router.post('/', async (req, res) => {
 
 // UPDATE TO SMARTEROBJECT
 router.patch('/update/:id', async (req, res) => {
-    console.log("id for this is", req.params)
-    console.log("req.body", req.body)
-    console.log("req.body.location_id", req.body.location_id)
-    console.log("req.body.macroObject_id", req.body.macroObject_id)
-    const sO_id = req.params.id
-    const location_id = req.body.location_id
-    const macroObject_id = req.body.macroObject_id
-    const macroObjectType = req.body.macroObjectType
-    const newIsCompleteStatus = req.body.newIsCompleteStatus
     const acctName = req.body.acctName
+    const dataPackage = req.body.data
+    console.log("id for this is @ dbConn", req.params)
+    console.log("req.body @ dbConn", dataPackage)
+    const sO_id = req.params.id
+    const location_id = dataPackage.location_id
+    const macroObject_id = dataPackage.macroObject_id
+    const macroObjectType = dataPackage.macroObjectType
+    const newIsCompleteStatus = dataPackage.newIsCompleteStatus
+    
     const collectionName = acctName + '-SmarterObject'
     const DynamicSmarterObjCollectionName = mongoose.model(
         'SmarterObject',
@@ -74,22 +74,29 @@ router.patch('/update/:id', async (req, res) => {
             if (!foundObject) res.status(404).send("Not Found")
             if (foundObject) {
                 let location = foundObject.locationObjs.id(location_id)
-                console.log(location)
-                let macroObjToUpdate = location[macroObjectType].id(macroObject_id)
-                if (newIsCompleteStatus === false) {
-                    macroObjToUpdate._isComplete = false
+                console.log(location_id, location.updatedAt)
+                const macroObjToUpdate = location[macroObjectType].id(macroObject_id)
+                if (!newIsCompleteStatus) {
+                    console.log("Macro is false")
+                    macroObjToUpdate._isComplete = newIsCompleteStatus
                     macroObjToUpdate._isCompletedAs = null
+                    foundObject.markModified('locationObjs')
+                    foundObject.save()
                     return res.status(200).send(
                         {
                             status: "item reset to default status",
                             macroObjToUpdate
                         })
                 }
-                macroObjToUpdate._isComplete = req.body.newIsCompleteStatus
-                macroObjToUpdate._isCompletedAs = req.body.newIsCompletedAs
+                console.log("Macro is true")
+                macroObjToUpdate._isComplete = dataPackage.newIsCompleteStatus
+                macroObjToUpdate._isCompletedAs = dataPackage.newIsCompletedAs
                 foundObject.markModified('locationObjs')
                 foundObject.save()
-                res.status(200).send(macroObjToUpdate)
+                return res.status(200).send({
+                    status: "item set to complete in DB",
+                    macroObjToUpdate
+                })
             }
         })  
 })
