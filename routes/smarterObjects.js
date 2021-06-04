@@ -44,7 +44,7 @@ router.post('/', async (req, res) => {
     })
     try{
     const savedSmarterObject = await smarterObject.save()
-    res.json(savedSmarterObject)
+    res.status(200).send(savedSmarterObject)
     }catch{
         err => res.json({message: err})
     }
@@ -71,11 +71,13 @@ router.patch('/update/:id', async (req, res) => {
     await DynamicSmarterObjCollectionName
         .findById(sO_id, function (err, foundObject) {
             if (err) return res.status(500).send(err)
-            if (!foundObject) res.status(404).send("Not Found")
+            if (!foundObject) return res.status(404).send("SmarterObject not Found")
             if (foundObject) {
-                let location = foundObject.locationObjs.id(location_id)
+                const location = foundObject.locationObjs.id(location_id)
+                if (!location) return res.status(404).send("Location not Found")
                 console.log(location_id, location.updatedAt)
                 const macroObjToUpdate = location[macroObjectType].id(macroObject_id)
+                if (!macroObjToUpdate) return res.status(404).send("MacroObject not Found")
                 if (!newIsCompleteStatus) {
                     console.log("Macro is false")
                     macroObjToUpdate._isComplete = newIsCompleteStatus
@@ -85,6 +87,7 @@ router.patch('/update/:id', async (req, res) => {
                     return res.status(200).send(
                         {
                             status: "item reset to default status",
+                            location,                            
                             macroObjToUpdate
                         })
                 }
