@@ -4,11 +4,13 @@ import mongoose from "mongoose"
 const router = express.Router()
 
 const SettingsObjectSchema = mongoose.Schema({
-    acctName: String,
+    acctName: { type: String, required: true },
     settingsDate: Number,
     settingsDateReadable: String,
     keyDriverSettings: Array,
     kpiSettings: Array
+}, {
+    timestamps: true
 })
 
 
