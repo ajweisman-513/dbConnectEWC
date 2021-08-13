@@ -9,6 +9,8 @@ const MicroBundleSchema = mongoose.Schema({
     keyDrvSettingsArray: Array,
     kpiSettingsArray: Array,
     microObjectsArray: Array
+}, {
+    timestamps: true
 })
 
 // GET LATEST Report OBJECT

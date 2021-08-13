@@ -33,8 +33,8 @@ import { smarterObjectsRoute } from './routes/smarterObjects.js'
 //MIDDLEWARE
 app.use('/settingsObjects', settingsObjectsRoute)
 app.use('/microBundles', microBundlesRoute)
-//app.use('/parsedReportsObjects', parsedReportsObjectsRoute)
 app.use('/smarterObjects', smarterObjectsRoute)
+//app.use('/parsedReportsObjects', parsedReportsObjectsRoute)
 
 //ROUTES
 app.get('/', (req,res) => {
