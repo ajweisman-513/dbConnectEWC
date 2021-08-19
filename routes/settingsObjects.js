@@ -4,9 +4,9 @@ import mongoose from "mongoose"
 const router = express.Router()
 
 const SettingsObjectSchema = mongoose.Schema({
-    acctName: String,
+    acctName: { type: String, required: true },
     settingsDate: Number,
-    settingsDateReadable: String,
+    settingsDateReadable: { type: String, required: true },
     keyDriverSettings: Array,
     kpiSettings: Array
 })

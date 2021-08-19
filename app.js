@@ -25,20 +25,21 @@ app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({ limit: '50mb' }));
 console.log('process.env.NODE_ENV', process.env.NODE_ENV)
 
+import { employeeReportsObjectsRoute } from './routes/employeeReportObjects.js';
 import { settingsObjectsRoute } from './routes/settingsObjects.js';
 import { microBundlesRoute } from './routes/microBundles.js';
-//import { parsedReportsObjectsRoute } from './routes/parsedReportObjects.js';
 import { smarterObjectsRoute } from './routes/smarterObjects.js'
 
 //MIDDLEWARE
+app.use('/employeeReportsObjects', employeeReportsObjectsRoute)
 app.use('/settingsObjects', settingsObjectsRoute)
 app.use('/microBundles', microBundlesRoute)
 app.use('/smarterObjects', smarterObjectsRoute)
-//app.use('/parsedReportsObjects', parsedReportsObjectsRoute)
+
 
 //ROUTES
 app.get('/', (req,res) => {
-    res.send('ET fone home')
+    res.send('dbConnectPage BLANK')
 }) 
 
 
