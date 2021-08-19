@@ -9,6 +9,8 @@ const SettingsObjectSchema = mongoose.Schema({
     settingsDateReadable: { type: String, required: true },
     keyDriverSettings: Array,
     kpiSettings: Array
+}, {
+    timestamps: true
 })
 
 
