@@ -14,7 +14,7 @@ let mongoDb = null
 if (process.env.NODE_ENV === "production") {
     mongoDb = process.env.DB_CONNECTION;
 } else {
-    mongoDb = process.env.DB_CONNECTION_DEV;
+    mongoDb = process.env.DB_CONNECTION_ME;
 }
 
 app.use(cors())
