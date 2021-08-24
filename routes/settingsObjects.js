@@ -6,9 +6,13 @@ const router = express.Router()
 const SettingsObjectSchema = mongoose.Schema({
     acctName: { type: String, required: true },
     settingsDate: Number,
-    settingsDateReadable: { type: String, required: true },
-    keyDriverSettings: Array,
-    kpiSettings: Array
+    bEmployeeClassificationInstructions: { type: Array, required: true },
+    bMetricInstructions: { type: Array, required: true },
+    cKeyDriversInstructions: { type: Array, required: true },
+    cTags: { type: Array, required: true },
+    cTargets: { type: Array, required: true },
+    dKpiLedger: { type: Array, required: true },
+    dKeyDriverLedger: { type: Array, required: true }
 }, {
     timestamps: true
 })
@@ -47,9 +51,14 @@ router.post('/', async (req, res) => {
     const settingsObject = new dynamicSetObjCollectionName({
         acctName: req.body._acctName,
         settingsDate: req.body._settingsDate,
-        settingsDateReadable: req.body._settingsDateReadable,
-        keyDriverSettings: req.body._keyDriverSettings,
-        kpiSettings: req.body._kpiSettings
+        aFieldInstructions: req.body._aFieldInstructions,
+        bEmployeeClassificationInstructions: req.body._bEmployeeClassificationInstructions,
+        bMetricInstructions: req.body._bMetricInstructions,
+        cKeyDriversInstructions: req.body._cKeyDriversInstructions,
+        cTags: req.body._cTags,
+        cTargets: req.body._cTargets,
+        dKpiLedger: req.body._dKpiLedger,
+        dKeyDriverLedger: req.body_dKeyDriverLedger
     })
     try{
     const savedSettingsObject = await settingsObject.save()
